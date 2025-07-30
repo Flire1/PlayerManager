@@ -1,3 +1,5 @@
+**Download here:** https://modrinth.com/plugin/playermanager
+
 # 🚧 This Plugin is in Beta
 **Player Manager is currently in active development.**  
 It’s fully functional, but more features and polish are on the way.  
