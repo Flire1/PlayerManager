@@ -3,7 +3,7 @@
 # 🚧 This Plugin is in Beta
 **Player Manager is currently in active development.**  
 It’s fully functional, but more features and polish are on the way.  
-Expect frequent updates as we work toward the full v1.0 release!
+Expect frequent updates as we work toward the full v1.0.0 release!
 
 
 # Player Manager
@@ -53,16 +53,15 @@ Built to be modular, intuitive, and perfect for server moderation teams.
 - ⚙️ Configurable presets
 - 🔧 More tools coming soon!
 
-## 💬 Support, Bugs & Suggestions
+## 💬 Support, Suggestions & Feedback
 
-Have a bug to report? Want to suggest a new feature? Need help?
+Want to suggest a new feature or need help?
 
 ### 👉 Join our Discord:
 [![Join Discord](https://img.shields.io/badge/Join%20Discord-Click%20Here-5865F2?style=flat-square&logo=discord&logoColor=white&labelColor=2C2F33)](https://discord.gg/XNeZR5pYbg)
 
 We actively monitor the server for:
 - 💬 Feedback
-- 🐞 Bug reports
 - 💡 Suggestions
 - ❓ Questions & help
 
