@@ -1,0 +1,13 @@
+name: PlayerManager
+version: '0.1.0'
+main: com.Flire2.PlayerManager
+api-version: '1.21'
+load: STARTUP
+authors: [ Flire2 ]
+
+commands:
+  pm:
+    description: Open the Player Manager GUI
+    usage: /pm <player>
+    permission: PlayerManager.Commands.pm
+    permission-message: You do not have permission to use this command.
