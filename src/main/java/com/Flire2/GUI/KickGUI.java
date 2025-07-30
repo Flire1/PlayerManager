@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class KickGUI implements Listener {
 
-    private static final String GUI_TITLE_PREFIX = "Choose a reason - ";
+    private static final String GUI_TITLE_PREFIX = "Kick - Choose a reason - ";
 
     public static void open(Player viewer, Player target) {
         String title = GUI_TITLE_PREFIX + target.getName();

@@ -1,10 +1,7 @@
 package com.Flire2;
 
 import com.Flire2.Commands.PlayerManagerCommand;
-import com.Flire2.GUI.EditStatsGUI;
-import com.Flire2.GUI.KickGUI;
-import com.Flire2.GUI.ModerationGUI;
-import com.Flire2.GUI.PlayerManagerGUI;
+import com.Flire2.GUI.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class PlayerManager extends JavaPlugin {
@@ -25,8 +22,11 @@ public final class PlayerManager extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerManagerGUI(), this);
         getServer().getPluginManager().registerEvents(new ModerationGUI(), this);
         getServer().getPluginManager().registerEvents(new KickGUI(), this);
-        getServer().getPluginManager().registerEvents(new com.Flire2.ChatInputListener(), this);
+        getServer().getPluginManager().registerEvents(new ChatInputListener(), this);
         getServer().getPluginManager().registerEvents(new EditStatsGUI(), this);
+
+        getServer().getPluginManager().registerEvents(new BanGUI(), this);
+        getServer().getPluginManager().registerEvents(new BanGUI.BanGUIDuration(), this);
     }
 
     @Override
