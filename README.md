@@ -15,8 +15,9 @@ It allows staff to easily manage players through menus — **no commands require
 
 Current functionality includes:
 
-- ✅ Viewing detailed player stats (health, hunger, gamemode, ping, etc.)
+- ✅ Viewing + editing detailed player stats (health, hunger, gamemode, ping, etc.)
 - 🦶 Kicking players with preset or custom reasons
+- 🔨 Baning players with presets or custom reasons + custom durations
 - 🔄 Much more on the way!
 
 Built to be modular, intuitive, and perfect for server moderation teams.
