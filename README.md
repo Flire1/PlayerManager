@@ -30,6 +30,8 @@ Built to be modular, intuitive, and perfect for server moderation teams.
   - Gamemode, world name, coordinates
   - Biome, dimension
   - Ping, UUID
+- And edit multiple stats like:
+  - Health, hunger, saturation, gamemode
 
 ### 🛡️ Moderation Dashboard
 - Clean, accessible menus for all actions
@@ -43,6 +45,8 @@ Built to be modular, intuitive, and perfect for server moderation teams.
   - Advertising
   - Staff Disrespect
   - Custom Reason
+    
+### 🔨 Ban Menu
 
 | Command       | Permission                    |
 |---------------|-------------------------------|
