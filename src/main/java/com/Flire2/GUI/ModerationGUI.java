@@ -22,21 +22,13 @@ public class ModerationGUI implements Listener {
         gui.setItem(4, GUICommon.createPlayerInfoHead(target));
 
         // Back
-        ItemStack back = new ItemStack(Material.ARROW);
-        var backMeta = back.getItemMeta();
-        if (backMeta != null) {
-            backMeta.setDisplayName(ChatColor.WHITE + "Back");
-            back.setItemMeta(backMeta);
-        }
-        gui.setItem(7, back);
-
         gui.setItem(7, GUICommon.createItem(Material.ARROW, ChatColor.WHITE + "Back"));
 
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.ORANGE_CONCRETE, "Kick"));
-        gui.setItem(11, GUICommon.createItem(Material.RED_CONCRETE, "Ban"));
+        gui.setItem(10, GUICommon.createItem(Material.ORANGE_CONCRETE, "Kick", "", ChatColor.GRAY + "> Click to open!"));
+        gui.setItem(11, GUICommon.createItem(Material.RED_CONCRETE, "Ban", "", ChatColor.GRAY + "> Click to open!"));
 
         viewer.openInventory(gui);
     }

@@ -24,6 +24,8 @@ public final class PlayerManager extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new KickGUI(), this);
         getServer().getPluginManager().registerEvents(new ChatInputListener(), this);
         getServer().getPluginManager().registerEvents(new EditStatsGUI(), this);
+        getServer().getPluginManager().registerEvents(new InventoryGUI(), this);
+        getServer().getPluginManager().registerEvents(new InventoryGUI.PlayerInventory(), this);
 
         getServer().getPluginManager().registerEvents(new BanGUI(), this);
         getServer().getPluginManager().registerEvents(new BanGUI.BanGUIDuration(), this);

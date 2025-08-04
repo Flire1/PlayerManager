@@ -23,8 +23,9 @@ public class EditStatsGUI implements Listener {
         gui.setItem(7, GUICommon.createItem(Material.ARROW, ChatColor.WHITE + "Back"));
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.RED_DYE, ChatColor.WHITE + "Edit Health", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to heal!", ChatColor.GRAY + "> Shift Click to kill!"));
-
+        gui.setItem(10, GUICommon.createItem(Material.RED_DYE, ChatColor.WHITE + "Edit Health", "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to heal!", ChatColor.GRAY + "> Shift Click to kill!"));
+        gui.setItem(11, GUICommon.createItem(Material.COOKED_BEEF, ChatColor.WHITE + "Edit Hunger", "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to max!", ChatColor.GRAY + "> Shift Click to empty!"));
+        gui.setItem(12, GUICommon.createItem(Material.GOLDEN_CARROT, ChatColor.WHITE + "Edit Saturation", "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to max!", ChatColor.GRAY + "> Shift Click to empty!"));
 
         gui.setItem(13, GUICommon.createItem(Material.BEACON, ChatColor.WHITE + "Edit Gamemode", ChatColor.GRAY + "> Click to edit!"));
 
@@ -95,6 +96,52 @@ public class EditStatsGUI implements Listener {
 
                     target.setHealth(value);
                     clicker.sendMessage(ChatColor.GREEN + "Set health to " + value);
+                    open(clicker, target);
+                });
+            }
+        }
+
+        if (slot == 11) {
+            if (click == ClickType.RIGHT) {
+                target.setFoodLevel(20);
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            } else if (click == ClickType.SHIFT_LEFT) {
+                target.setFoodLevel(0);
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            } else {
+                clicker.closeInventory();
+
+                PromptUtils.intPrompt(clicker, "Enter the new hunger value:", value -> {
+                    if (!target.isOnline()) {
+                        clicker.sendMessage(ChatColor.RED + "Target player is no longer online.");
+                        return;
+                    }
+
+                    target.setFoodLevel(value);
+                    clicker.sendMessage(ChatColor.GREEN + "Set hunger to " + value);
+                    open(clicker, target);
+                });
+            }
+        }
+
+        if (slot == 12) {
+            if (click == ClickType.RIGHT) {
+                target.setSaturation(target.getFoodLevel());
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            } else if (click == ClickType.SHIFT_LEFT) {
+                target.setSaturation(0);
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            } else {
+                clicker.closeInventory();
+
+                PromptUtils.intPrompt(clicker, "Enter the new saturation value:", value -> {
+                    if (!target.isOnline()) {
+                        clicker.sendMessage(ChatColor.RED + "Target player is no longer online.");
+                        return;
+                    }
+
+                    target.setSaturation(value);
+                    clicker.sendMessage(ChatColor.GREEN + "Set saturation to " + value);
                     open(clicker, target);
                 });
             }

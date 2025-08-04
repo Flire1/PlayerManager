@@ -12,6 +12,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class KickGUI implements Listener {
 
     private static final String GUI_TITLE_PREFIX = "Kick - Choose a reason - ";
@@ -29,10 +32,15 @@ public class KickGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
+        // The following items were made before the GUICommon.createItem (that is why they look different from the simpler version)
         ItemStack spam = new ItemStack(Material.OAK_SIGN);
         var spamMeta = spam.getItemMeta();
         if (spamMeta != null) {
             spamMeta.setDisplayName("Spamming");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to kick player!");
+            spamMeta.setLore(lore);
             spam.setItemMeta(spamMeta);
         }
         gui.setItem(10, spam);
@@ -41,6 +49,10 @@ public class KickGUI implements Listener {
         var insultMeta = insult.getItemMeta();
         if (insultMeta != null) {
             insultMeta.setDisplayName(ChatColor.WHITE + "Rude / Toxic / Insulting");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to kick player!");
+            insultMeta.setLore(lore);
             insult.setItemMeta(insultMeta);
         }
         gui.setItem(11, insult);
@@ -49,6 +61,10 @@ public class KickGUI implements Listener {
         var languageMeta = language.getItemMeta();
         if (languageMeta != null) {
             languageMeta.setDisplayName("Inappropriate Language");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to kick player!");
+            languageMeta.setLore(lore);
             language.setItemMeta(languageMeta);
         }
         gui.setItem(12, language);
@@ -57,6 +73,10 @@ public class KickGUI implements Listener {
         var blankMeta = blank.getItemMeta();
         if (blankMeta != null) {
             blankMeta.setDisplayName("None");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to kick player!");
+            blankMeta.setLore(lore);
             blank.setItemMeta(blankMeta);
         }
         gui.setItem(15, blank);
@@ -65,6 +85,10 @@ public class KickGUI implements Listener {
         var customMeta = custom.getItemMeta();
         if (customMeta != null) {
             customMeta.setDisplayName("Enter your own");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to enter custom reason!");
+            customMeta.setLore(lore);
             custom.setItemMeta(customMeta);
         }
         gui.setItem(16, custom);
@@ -73,6 +97,10 @@ public class KickGUI implements Listener {
         var adsMeta = ads.getItemMeta();
         if (adsMeta != null) {
             adsMeta.setDisplayName("Advertising");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to kick player!");
+            adsMeta.setLore(lore);
             ads.setItemMeta(adsMeta);
         }
         gui.setItem(19, ads);
@@ -81,6 +109,10 @@ public class KickGUI implements Listener {
         var staffMeta = staff.getItemMeta();
         if (staffMeta != null) {
             staffMeta.setDisplayName(ChatColor.WHITE + "Staff Disrespect");
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add(ChatColor.GRAY + "> Click to kick player!");
+            staffMeta.setLore(lore);
             staff.setItemMeta(staffMeta);
         }
         gui.setItem(20, staff);

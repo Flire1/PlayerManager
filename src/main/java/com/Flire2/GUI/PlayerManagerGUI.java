@@ -24,14 +24,9 @@ public class PlayerManagerGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        // Moderation
-        ItemStack moderation = new ItemStack(Material.RED_DYE);
-        var moderationMeta = moderation.getItemMeta();
-        if (moderationMeta != null) {
-            moderationMeta.setDisplayName("Moderation");
-            moderation.setItemMeta(moderationMeta);
-        }
-        gui.setItem(10, moderation);
+        // Categories
+        gui.setItem(10, GUICommon.createItem(Material.RED_DYE, "Moderation", ChatColor.GRAY + "Kick, Ban", "", ChatColor.GRAY + "> Click to open!"));
+        gui.setItem(11, GUICommon.createItem(Material.CHEST, "Inventory", "", ChatColor.GRAY + "> Click to open!"));
 
         viewer.openInventory(gui);
     }
@@ -74,6 +69,15 @@ public class PlayerManagerGUI implements Listener {
         if (slot == 10) {
             if (target != null) {
                 ModerationGUI.open(clicker, target);
+                clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+            }
+        }
+
+        if (slot == 11) {
+            if (target != null) {
+                InventoryGUI.open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
             } else {
                 clicker.sendMessage(ChatColor.RED + "Target player not found.");

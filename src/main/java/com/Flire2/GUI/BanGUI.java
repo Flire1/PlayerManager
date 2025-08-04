@@ -33,19 +33,19 @@ public class BanGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.COMMAND_BLOCK, ChatColor.WHITE + "Cheating / Hacking"));
+        gui.setItem(10, GUICommon.createItem(Material.COMMAND_BLOCK, ChatColor.WHITE + "Cheating / Hacking", "", ChatColor.GRAY + "> Click to choose duration!"));
 
-        gui.setItem(11, GUICommon.createItem(Material.STRING, "Repeated Rule Breaking"));
+        gui.setItem(11, GUICommon.createItem(Material.STRING, "Repeated Rule Breaking", "", ChatColor.GRAY + "> Click to choose duration!"));
 
-        gui.setItem(12, GUICommon.createItem(Material.OAK_SIGN, "Exploiting Bugs"));
+        gui.setItem(12, GUICommon.createItem(Material.OAK_SIGN, "Exploiting Bugs", "", ChatColor.GRAY + "> Click to choose duration!"));
 
-        gui.setItem(15, GUICommon.createItem(Material.PAPER, "None"));
+        gui.setItem(15, GUICommon.createItem(Material.PAPER, "None", "", ChatColor.GRAY + "> Click to choose duration!"));
 
-        gui.setItem(16, GUICommon.createItem(Material.BOOK, "Enter your own"));
+        gui.setItem(16, GUICommon.createItem(Material.BOOK, "Enter your own", "", ChatColor.GRAY + "> Click to enter custom reason!"));
 
-        gui.setItem(19, GUICommon.createItem(Material.BELL, "Ban Evasion"));
+        gui.setItem(19, GUICommon.createItem(Material.BELL, "Ban Evasion", "", ChatColor.GRAY + "> Click to choose duration!"));
 
-        gui.setItem(20, GUICommon.createItem(Material.COMMAND_BLOCK, ChatColor.WHITE + "Harassment / Threats"));
+        gui.setItem(20, GUICommon.createItem(Material.COMMAND_BLOCK, ChatColor.WHITE + "Harassment / Threats", "", ChatColor.GRAY + "> Click to choose duration!"));
 
         viewer.openInventory(gui);
     }
