@@ -48,6 +48,8 @@ Built to be modular, intuitive, and perfect for server moderation teams.
     
 ### 🔨 Ban Menu
 
+### 📦 Inventory and enderchest viewer + editor
+
 | Command       | Permission                    |
 |---------------|-------------------------------|
 | `/pm <player>` | `PlayerManager.Commands.pm`   |
