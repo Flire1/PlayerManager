@@ -35,6 +35,9 @@ public class InventoryGUI implements Listener {
         gui.setItem(10, GUICommon.createItem(Material.CHEST, "View Inventory", ChatColor.GOLD + "> This is an experimental feature. Expect some bugs!"));
         gui.setItem(11, GUICommon.createItem(Material.ENDER_CHEST, "View Ender Chest"));
 
+        gui.setItem(16, GUICommon.createItem(Material.BARRIER, ChatColor.WHITE + "Clear Inventory"));
+
+
         viewer.openInventory(gui);
     }
 
@@ -99,6 +102,18 @@ public class InventoryGUI implements Listener {
                 clicker.sendMessage(ChatColor.RED + "Target player not found.");
             }
         }
+
+        if (slot == 16) {
+            if (target != null) {
+                target.getInventory().clear();
+                target.getInventory().setArmorContents(null);
+                target.getInventory().setItemInOffHand(null);
+                target.updateInventory();
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+            }
+        }
     }
 
     public static class PlayerInventory implements Listener {
@@ -143,15 +158,18 @@ public class InventoryGUI implements Listener {
             String title = event.getView().getTitle();
             if (!title.startsWith(GUI_TITLE_PREFIX)) return;
 
-            if (event.getClickedInventory() != event.getView().getTopInventory()) {
-                event.setCancelled(true);
-                return;
-            }
+            Inventory clickedInv = event.getClickedInventory();
+            Inventory topInv = event.getView().getTopInventory();
 
-            ItemStack clicked = event.getCurrentItem();
-            if (clicked != null && clicked.getType() == Material.WHITE_STAINED_GLASS_PANE) {
-                event.setCancelled(true);
-                return;
+            if (clickedInv == null || clickedInv != topInv) return;
+
+            int slot = event.getRawSlot();
+            if (slot >= 4 && slot <= 17) {
+                ItemStack item = event.getClickedInventory().getItem(slot);
+                if (item != null && item.getType() == Material.WHITE_STAINED_GLASS_PANE) {
+                    event.setCancelled(true);
+                    return;
+                }
             }
 
             UUID targetUUID = viewingMap.get(viewer.getUniqueId());
@@ -168,14 +186,10 @@ public class InventoryGUI implements Listener {
                 return;
             }
 
-            int slot = event.getSlot();
-
             event.setCancelled(false);
 
             Bukkit.getScheduler().runTaskLater(PlayerManager.getInstance(), () -> {
                 ItemStack updated = event.getView().getTopInventory().getItem(slot);
-                if (updated != null && updated.getType() == Material.WHITE_STAINED_GLASS_PANE) return;
-
                 switch (slot) {
                     case 0 -> target.getInventory().setHelmet(updated);
                     case 1 -> target.getInventory().setChestplate(updated);

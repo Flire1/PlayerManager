@@ -28,6 +28,9 @@ public class PlayerManagerGUI implements Listener {
         gui.setItem(10, GUICommon.createItem(Material.RED_DYE, "Moderation", ChatColor.GRAY + "Kick, Ban", "", ChatColor.GRAY + "> Click to open!"));
         gui.setItem(11, GUICommon.createItem(Material.CHEST, "Inventory", "", ChatColor.GRAY + "> Click to open!"));
 
+        gui.setItem(16, GUICommon.createItem(Material.COMMAND_BLOCK, ChatColor.WHITE + "Actions", "", ChatColor.GRAY + "> Click to open!"));
+        gui.setItem(14, GUICommon.createItem(Material.PLAYER_HEAD, ChatColor.WHITE + "Identity", "", ChatColor.GRAY + "> Click to open!"));
+
         viewer.openInventory(gui);
     }
 
@@ -78,6 +81,24 @@ public class PlayerManagerGUI implements Listener {
         if (slot == 11) {
             if (target != null) {
                 InventoryGUI.open(clicker, target);
+                clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+            }
+        }
+
+        if (slot == 14) {
+            if (target !=null) {
+                IdentityGUI.open(clicker, target);
+                clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+            }
+        }
+
+        if (slot == 16) {
+            if (target != null) {
+                ActionsGUI.open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
             } else {
                 clicker.sendMessage(ChatColor.RED + "Target player not found.");
