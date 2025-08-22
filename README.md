@@ -1,12 +1,13 @@
 **Download here:** https://modrinth.com/plugin/playermanager
 
 # 🚧 This Plugin is in Beta
-**Player Manager is currently in active development.**  
-It’s fully functional, but more features and polish are on the way.  
+**Player Manager is currently in active development.**
+It’s fully functional, but more features and polish are on the way.
 Expect frequent updates as we work toward the full v1.0.0 release!
 
-## 🚀 Major Update Out Now!
-v0.4.0
+## 🚀 Another Major Update Coming Soon! v0.5.0
+**Updates to the actions, identity and stats GUI + Warning and IP ban system!**
+<br>Should be released in ~2-4 days
 
 # Player Manager
 [![Join Discord](https://img.shields.io/badge/Join%20Discord-Click%20Here-5865F2?style=flat-square&logo=discord&logoColor=white&labelColor=2C2F33)](https://discord.gg/XNeZR5pYbg)
