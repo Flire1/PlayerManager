@@ -1,10 +1,13 @@
 **Download here:** https://modrinth.com/plugin/playermanager
 
 # 🚧 This Plugin is in Beta
-**Player Manager is currently in active development.**  
-It’s fully functional, but more features and polish are on the way.  
+**Player Manager is currently in active development.**
+It’s fully functional, but more features and polish are on the way.
 Expect frequent updates as we work toward the full v1.0.0 release!
 
+## 🚀 Another Major Update Coming Soon! v0.5.0
+**Updates to the actions, identity and stats GUI + Warning and IP ban system!**
+<br>Should be released in ~2-4 days
 
 # Player Manager
 [![Join Discord](https://img.shields.io/badge/Join%20Discord-Click%20Here-5865F2?style=flat-square&logo=discord&logoColor=white&labelColor=2C2F33)](https://discord.gg/XNeZR5pYbg)
@@ -16,8 +19,11 @@ It allows staff to easily manage players through menus — **no commands require
 Current functionality includes:
 
 - ✅ Viewing + editing detailed player stats (health, hunger, gamemode, ping, etc.)
-- 🦶 Kicking players with preset or custom reasons
+- 🦶 Kicking players with presets or custom reasons
 - 🔨 Baning players with presets or custom reasons + custom durations
+- 📦 Edit inventories and enderchest with ease
+- 🎬 Preform actions on players (Teleport, Freeze, Godmode, Flight)
+- 🙋 Change player identity (Name, Tab List Name)
 - 🔄 Much more on the way!
 
 Built to be modular, intuitive, and perfect for server moderation teams.
@@ -38,17 +44,16 @@ Built to be modular, intuitive, and perfect for server moderation teams.
 - Easy-to-navigate interface
 
 ### 🥾 Kick Menu
-- Choose a preset reason or define your own:
-  - Spamming
-  - Toxic/Insulting
-  - Inappropriate Language
-  - Advertising
-  - Staff Disrespect
-  - Custom Reason
+Choose a preset reason or define your own.
     
 ### 🔨 Ban Menu
+Choose a preset reason or define your own. Also choose a custom duration!
 
 ### 📦 Inventory and enderchest viewer + editor
+
+### 🎬 Actions Menu
+
+### 🙋 Identity Menu
 
 | Command       | Permission                    |
 |---------------|-------------------------------|
