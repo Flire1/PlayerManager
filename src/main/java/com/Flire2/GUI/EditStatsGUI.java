@@ -2,6 +2,7 @@ package com.Flire2.GUI;
 
 import com.Flire2.GUICommon;
 import com.Flire2.Option;
+import com.Flire2.PlayerDataManagerTemp;
 import com.Flire2.PromptUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -23,11 +24,11 @@ public class EditStatsGUI implements Listener {
         gui.setItem(7, GUICommon.createItem(Material.ARROW, ChatColor.WHITE + "Back"));
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.RED_DYE, ChatColor.WHITE + "Edit Health", "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to heal!", ChatColor.GRAY + "> Shift Click to kill!"));
-        gui.setItem(11, GUICommon.createItem(Material.COOKED_BEEF, ChatColor.WHITE + "Edit Hunger", "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to max!", ChatColor.GRAY + "> Shift Click to empty!"));
-        gui.setItem(12, GUICommon.createItem(Material.GOLDEN_CARROT, ChatColor.WHITE + "Edit Saturation", "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to max!", ChatColor.GRAY + "> Shift Click to empty!"));
+        gui.setItem(10, GUICommon.createItem(Material.RED_DYE, ChatColor.WHITE + "Edit Health", "", ChatColor.WHITE + "Current Health: " + ChatColor.GRAY + target.getHealth(), "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to heal!", ChatColor.GRAY + "> Shift Click to kill!"));
+        gui.setItem(11, GUICommon.createItem(Material.COOKED_BEEF, ChatColor.WHITE + "Edit Hunger", "", ChatColor.WHITE + "Current Hunger: " + ChatColor.GRAY + target.getFoodLevel(), "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to max!", ChatColor.GRAY + "> Shift Click to empty!"));
+        gui.setItem(12, GUICommon.createItem(Material.GOLDEN_CARROT, ChatColor.WHITE + "Edit Saturation", "", ChatColor.WHITE + "Current Saturation: " + ChatColor.GRAY + target.getSaturation(), "", ChatColor.GRAY + "> Click to edit!", ChatColor.GRAY + "> Right Click to max!", ChatColor.GRAY + "> Shift Click to empty!"));
 
-        gui.setItem(13, GUICommon.createItem(Material.BEACON, ChatColor.WHITE + "Edit Gamemode", ChatColor.GRAY + "> Click to edit!"));
+        gui.setItem(13, GUICommon.createItem(Material.BEACON, ChatColor.WHITE + "Edit Gamemode", "", ChatColor.WHITE + "Current Gamemode: " + ChatColor.GRAY + target.getGameMode(), "", ChatColor.GRAY + "> Click to edit!"));
 
         viewer.openInventory(gui);
     }
@@ -70,9 +71,11 @@ public class EditStatsGUI implements Listener {
         if (slot == 10) {
             if (click == ClickType.RIGHT) {
                 target.setHealth(target.getMaxHealth());
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else if (click == ClickType.SHIFT_LEFT) {
                 target.setHealth(0);
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else {
                 clicker.closeInventory();
@@ -97,6 +100,7 @@ public class EditStatsGUI implements Listener {
                     target.setHealth(value);
                     clicker.sendMessage(ChatColor.GREEN + "Set health to " + value);
                     open(clicker, target);
+                    clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                 });
             }
         }
@@ -104,9 +108,11 @@ public class EditStatsGUI implements Listener {
         if (slot == 11) {
             if (click == ClickType.RIGHT) {
                 target.setFoodLevel(20);
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else if (click == ClickType.SHIFT_LEFT) {
                 target.setFoodLevel(0);
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else {
                 clicker.closeInventory();
@@ -120,6 +126,7 @@ public class EditStatsGUI implements Listener {
                     target.setFoodLevel(value);
                     clicker.sendMessage(ChatColor.GREEN + "Set hunger to " + value);
                     open(clicker, target);
+                    clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                 });
             }
         }
@@ -127,9 +134,11 @@ public class EditStatsGUI implements Listener {
         if (slot == 12) {
             if (click == ClickType.RIGHT) {
                 target.setSaturation(target.getFoodLevel());
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else if (click == ClickType.SHIFT_LEFT) {
                 target.setSaturation(0);
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else {
                 clicker.closeInventory();
@@ -143,6 +152,7 @@ public class EditStatsGUI implements Listener {
                     target.setSaturation(value);
                     clicker.sendMessage(ChatColor.GREEN + "Set saturation to " + value);
                     open(clicker, target);
+                    clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                 });
             }
         }
@@ -155,11 +165,31 @@ public class EditStatsGUI implements Listener {
                 return;
             }
             PromptUtils.optionPrompt(clicker, "Choose a gamemode:",
-                    new Option("Creative", () -> target.setGameMode(GameMode.CREATIVE)),
-                    new Option("Survival", () -> target.setGameMode(GameMode.SURVIVAL)),
-                    new Option("Adventure", () -> target.setGameMode(GameMode.ADVENTURE)),
-                    new Option("Spectator", () -> target.setGameMode(GameMode.SPECTATOR)),
-                    new Option("Cancel", () -> clicker.sendMessage(ChatColor.GRAY + "Cancelled."))
+                    new Option("Creative", () -> {
+                        target.setGameMode(GameMode.CREATIVE);
+                        open(clicker, target);
+                        clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+                    }),
+                    new Option("Survival", () -> {
+                        target.setGameMode(GameMode.SURVIVAL);
+                        open(clicker, target);
+                        clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+                    }),
+                    new Option("Adventure", () -> {
+                        target.setGameMode(GameMode.ADVENTURE);
+                        open(clicker, target);
+                        clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+                    }),
+                    new Option("Spectator", () -> {
+                        target.setGameMode(GameMode.SPECTATOR);
+                        open(clicker, target);
+                        clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+                    }),
+                    new Option("Cancel", () -> {
+                        clicker.sendMessage(ChatColor.GRAY + "Cancelled.");
+                        open(clicker, target);
+                        clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+                    })
             );
         }
     }

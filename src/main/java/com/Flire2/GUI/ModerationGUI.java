@@ -29,6 +29,8 @@ public class ModerationGUI implements Listener {
 
         gui.setItem(10, GUICommon.createItem(Material.ORANGE_CONCRETE, "Kick", "", ChatColor.GRAY + "> Click to open!"));
         gui.setItem(11, GUICommon.createItem(Material.RED_CONCRETE, "Ban", "", ChatColor.GRAY + "> Click to open!"));
+        gui.setItem(12, GUICommon.createItem(Material.BLACK_CONCRETE, "Ban IP", "", ChatColor.GRAY + "> Click to open!"));
+        gui.setItem(13, GUICommon.createItem(Material.YELLOW_CONCRETE, "Warn", "", ChatColor.GRAY + "> Will be added in 0.6.0!"));
 
         viewer.openInventory(gui);
     }
@@ -94,5 +96,13 @@ public class ModerationGUI implements Listener {
                 clicker.sendMessage(ChatColor.RED + "Target player not found.");
             }
         }
+
+        if (slot == 12) {
+            if (target != null) {
+                BanIPGUI.open(clicker, target);
+                clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+            }        }
     }
 }

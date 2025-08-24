@@ -29,8 +29,8 @@ public class IdentityGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, "Edit Display Name / Nickname", ChatColor.GRAY + "Does NOT appear in tab list!"));
-        gui.setItem(11, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Edit Tab List Name"));
+        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, "Edit Display Name / Nickname", "", ChatColor.WHITE + "Current Display Name: " + ChatColor.GRAY + target.getDisplayName(), "", ChatColor.GRAY + "Does NOT appear in tab list!"));
+        gui.setItem(11, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Edit Tab List Name", "", ChatColor.WHITE + "Current Tab List Name: " + ChatColor.GRAY + target.getPlayerListName()));
 
         gui.setItem(16, GUICommon.createItem(Material.BARRIER, ChatColor.WHITE + "Reset Identity", ChatColor.GRAY + "Requires player to rejoin!"));
 
@@ -91,6 +91,7 @@ public class IdentityGUI implements Listener {
                     clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                     clicker.sendMessage(ChatColor.GREEN + "" + target + "'s display name changed to" + name);
                     PlayerDataManagerPerm.set(target.getUniqueId(), "displayName", name);
+                    open(clicker, target);
                 } else {
                     clicker.sendMessage(ChatColor.RED + "Target player is no longer online.");
                 }
@@ -107,6 +108,7 @@ public class IdentityGUI implements Listener {
                     clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
                     clicker.sendMessage(ChatColor.GREEN + "" + target + "'s tab list name changed to" + tabname);
                     PlayerDataManagerPerm.set(target.getUniqueId(), "tabListName", tabname);
+                    open(clicker, target);
                 } else {
                     clicker.sendMessage(ChatColor.RED + "Target player is no longer online.");
                 }
@@ -117,6 +119,7 @@ public class IdentityGUI implements Listener {
             PlayerDataManagerPerm.set(target.getUniqueId(), "displayName", null);
             PlayerDataManagerPerm.set(target.getUniqueId(), "tabListName", null);
             clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            open(clicker, target);
         }
     }
 }

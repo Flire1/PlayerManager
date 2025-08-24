@@ -4,6 +4,7 @@ import com.Flire2.ActionsManager.Flight;
 import com.Flire2.ActionsManager.Freeze;
 import com.Flire2.ActionsManager.Godmode;
 import com.Flire2.GUICommon;
+import com.Flire2.PlayerDataManagerPerm;
 import com.Flire2.PlayerDataManagerTemp;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -30,10 +31,14 @@ public class ActionsGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
+        boolean isFrozen = Boolean.TRUE.equals(PlayerDataManagerTemp.get(target.getUniqueId(), "isFrozen"));
+        boolean hasGodmode = Boolean.TRUE.equals(PlayerDataManagerTemp.get(target.getUniqueId(), "hasGodmode"));
+        boolean allowFlight = Boolean.TRUE.equals(PlayerDataManagerTemp.get(target.getUniqueId(), "allowFlight"));
+
         gui.setItem(10, GUICommon.createItem(Material.ENDER_PEARL, "Teleport", ChatColor.GRAY + "> Click to teleport to player!", ChatColor.GRAY + "> Right click to teleport player to you!"));
-        gui.setItem(11, GUICommon.createItem(Material.ICE, "Freeze", ChatColor.GRAY + "> Click to freeze player!", ChatColor.GRAY + "> Right click unfreeze!"));
-        gui.setItem(12, GUICommon.createItem(Material.ENCHANTED_GOLDEN_APPLE, ChatColor.WHITE + "Godmode", ChatColor.GRAY + "> Click to enable godmode!", ChatColor.GRAY + "> Right click to disable godmode!"));
-        gui.setItem(13, GUICommon.createItem(Material.FEATHER, "Flight", ChatColor.GRAY + "> Click to enable flight!", ChatColor.GRAY + "> Right click to disable flight!"));
+        gui.setItem(11, GUICommon.createItem(Material.ICE, "Freeze", "", ChatColor.WHITE + "Current Status: " + (isFrozen ? ChatColor.RED + "Frozen" : ChatColor.GREEN + "Unfrozen"), "", ChatColor.GRAY + "> Click to freeze player!", ChatColor.GRAY + "> Right click unfreeze!"));
+        gui.setItem(12, GUICommon.createItem(Material.ENCHANTED_GOLDEN_APPLE, ChatColor.WHITE + "Godmode", "", ChatColor.WHITE + "Current Status: " + (hasGodmode ? ChatColor.GREEN + "Enabled" : ChatColor.RED + "Disabled"), "", ChatColor.WHITE + "Godmode", ChatColor.GRAY + "> Click to enable godmode!", ChatColor.GRAY + "> Right click to disable godmode!"));
+        gui.setItem(13, GUICommon.createItem(Material.FEATHER, "Flight", "", ChatColor.WHITE + "Current Status: " + (allowFlight ? ChatColor.GREEN + "Enabled" : ChatColor.RED + "Disabled"), "", ChatColor.GRAY + "> Click to enable flight!", ChatColor.GRAY + "> Right click to disable flight!"));
 
         viewer.openInventory(gui);
     }
@@ -96,12 +101,14 @@ public class ActionsGUI implements Listener {
             if (click == ClickType.RIGHT) {
                 PlayerDataManagerTemp.set(target.getUniqueId(), "isFrozen", false);
                 Freeze.updateFreezeStatus(target);
+                open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             } else {
                 PlayerDataManagerTemp.set(target.getUniqueId(), "isFrozen", true);
                 Freeze.updateFreezeStatus(target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             }
+            open(clicker, target);
         }
 
         if (slot == 12) {
@@ -114,6 +121,7 @@ public class ActionsGUI implements Listener {
                 Godmode.updateGodmodeStatus(target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             }
+            open(clicker, target);
         }
 
         if (slot == 13) {
@@ -126,6 +134,7 @@ public class ActionsGUI implements Listener {
                 Flight.updateFlightStatus(target);
                 clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
             }
+            open(clicker, target);
         }
     }
 }
