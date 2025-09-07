@@ -5,9 +5,13 @@
 It’s fully functional, but more features and polish are on the way.
 Expect frequent updates as we work toward the full v1.0.0 release!
 
-## 🚀 Another Major Update Coming Soon! v0.5.0
-**Updates to the actions, identity and stats GUI + Warning and IP ban system!**
-<br>Should be released in ~2-4 days
+## 🚀 Minor Update Out Now! v0.5.1
+**New Display Menu (Title, Subtitle)**
+
+## 🚀 Major Update Coming Soon! v0.6.0
+**New warning system + Updates to the display menu (actionbars, scorboard, and more!)**<br>
+**Also quality of life changes!**<br>
+This one may take a little time
 
 # Player Manager
 [![Join Discord](https://img.shields.io/badge/Join%20Discord-Click%20Here-5865F2?style=flat-square&logo=discord&logoColor=white&labelColor=2C2F33)](https://discord.gg/XNeZR5pYbg)
@@ -45,15 +49,22 @@ Built to be modular, intuitive, and perfect for server moderation teams.
 
 ### 🥾 Kick Menu
 Choose a preset reason or define your own.
-    
+
 ### 🔨 Ban Menu
 Choose a preset reason or define your own. Also choose a custom duration!
 
 ### 📦 Inventory and enderchest viewer + editor
 
 ### 🎬 Actions Menu
+Freeze and teleport player, give godmode and flight to player + more soon
 
 ### 🙋 Identity Menu
+Change player name, tab list name + more soon
+
+### 🔨 IP Ban Menu
+Choose a preset reason or define your own. Also choose a custom duration!
+
+### 🖥️ Display Menu
 
 | Command       | Permission                    |
 |---------------|-------------------------------|

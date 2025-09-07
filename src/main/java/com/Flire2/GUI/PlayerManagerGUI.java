@@ -29,6 +29,7 @@ public class PlayerManagerGUI implements Listener {
         gui.setItem(11, GUICommon.createItem(Material.CHEST, "Inventory", "", ChatColor.GRAY + "> Click to open!"));
 
         gui.setItem(16, GUICommon.createItem(Material.COMMAND_BLOCK, ChatColor.WHITE + "Actions", "", ChatColor.GRAY + "> Click to open!"));
+        gui.setItem(15, GUICommon.createItem(Material.PAINTING, ChatColor.WHITE + "Display", "", ChatColor.GRAY + "> Click to open!"));
         gui.setItem(14, GUICommon.createItem(Material.PLAYER_HEAD, ChatColor.WHITE + "Identity", "", ChatColor.GRAY + "> Click to open!"));
 
         viewer.openInventory(gui);
@@ -90,6 +91,15 @@ public class PlayerManagerGUI implements Listener {
         if (slot == 14) {
             if (target !=null) {
                 IdentityGUI.open(clicker, target);
+                clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+            }
+        }
+
+        if (slot == 15) {
+            if (target !=null) {
+                DisplayGUI.open(clicker, target);
                 clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
             } else {
                 clicker.sendMessage(ChatColor.RED + "Target player not found.");

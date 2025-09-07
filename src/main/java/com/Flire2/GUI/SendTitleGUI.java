@@ -12,9 +12,16 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-public class IdentityGUI implements Listener {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-    private static final String GUI_TITLE_PREFIX = "Player Identity - ";
+public class SendTitleGUI implements Listener {
+
+    private static final String GUI_TITLE_PREFIX = "Config Title - ";
+
+    private static final Map<UUID, String> pTitle = new HashMap<>();
+    private static final Map<UUID, String> sTitle = new HashMap<>();
 
     public static void open(Player viewer, Player target) {
         String title = GUI_TITLE_PREFIX + target.getName();
@@ -29,10 +36,10 @@ public class IdentityGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, "Edit Display Name / Nickname", "", ChatColor.WHITE + "Current Display Name: " + ChatColor.GRAY + target.getDisplayName(), "", ChatColor.GRAY + "Does NOT appear in tab list!"));
-        gui.setItem(11, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Edit Tab List Name", "", ChatColor.WHITE + "Current Tab List Name: " + ChatColor.GRAY + target.getPlayerListName()));
+        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, "Text"));
+        gui.setItem(11, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Subtitle"));
 
-        gui.setItem(16, GUICommon.createItem(Material.BARRIER, ChatColor.WHITE + "Reset Identity", "", ChatColor.RED + "Requires player to rejoin!"));
+        gui.setItem(16, GUICommon.createItem(Material.GREEN_CONCRETE, "Send Title"));
 
         viewer.openInventory(gui);
     }
@@ -83,43 +90,48 @@ public class IdentityGUI implements Listener {
 
         if (slot == 10) {
             clicker.closeInventory();
-            clicker.sendMessage(ChatColor.YELLOW + "Please type the new display name in chat.");
+            clicker.sendMessage(ChatColor.YELLOW + "Please type the title text in chat.");
 
-            ChatInputListener.inputMap.put(clicker.getUniqueId(), name -> {
-                if (target.isOnline()) {
-                    target.setDisplayName(name);
+            ChatInputListener.inputMap.put(clicker.getUniqueId(), input -> {
+                if (target != null) {
+                    pTitle.put(target.getUniqueId(), input);
                     clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
-                    clicker.sendMessage(ChatColor.GREEN + "" + target + "'s display name changed to" + name);
-                    PlayerDataManagerPerm.set(target.getUniqueId(), "displayName", name);
+                    clicker.sendMessage(ChatColor.GREEN + "Title set for " + target.getName() + ": " + input);
                     open(clicker, target);
                 } else {
-                    clicker.sendMessage(ChatColor.RED + "Target player is no longer online.");
+                    clicker.sendMessage(ChatColor.RED + "Target player not found.");
                 }
             });
         }
 
         if (slot == 11) {
             clicker.closeInventory();
-            clicker.sendMessage(ChatColor.YELLOW + "Please type the new tab list name in chat.");
+            clicker.sendMessage(ChatColor.YELLOW + "Please type the subtitle text in chat.");
 
-            ChatInputListener.inputMap.put(clicker.getUniqueId(), tabname -> {
-                if (target.isOnline()) {
-                    target.setPlayerListName(tabname);
+            ChatInputListener.inputMap.put(clicker.getUniqueId(), input -> {
+                if (target != null) {
+                    sTitle.put(target.getUniqueId(), input);
                     clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
-                    clicker.sendMessage(ChatColor.GREEN + "" + target + "'s tab list name changed to" + tabname);
-                    PlayerDataManagerPerm.set(target.getUniqueId(), "tabListName", tabname);
+                    clicker.sendMessage(ChatColor.GREEN + "Subtitle set for " + target.getName() + ": " + input);
                     open(clicker, target);
                 } else {
-                    clicker.sendMessage(ChatColor.RED + "Target player is no longer online.");
+                    clicker.sendMessage(ChatColor.RED + "Target player not found.");
                 }
             });
         }
 
         if (slot == 16) {
-            PlayerDataManagerPerm.set(target.getUniqueId(), "displayName", null);
-            PlayerDataManagerPerm.set(target.getUniqueId(), "tabListName", null);
+            if (target == null) {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+                return;
+            }
+
+            String titleText = pTitle.get(target.getUniqueId());
+            String subtitleText = sTitle.get(target.getUniqueId());
+
+            // make it display the curent one with a message when you send the title and make it so you can clear a title in the icons for setting it and shit
+            target.sendTitle(titleText, subtitleText, 20, 70, 20);
             clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
-            open(clicker, target);
         }
     }
 }
