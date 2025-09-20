@@ -1,8 +1,8 @@
 package com.Flire2.GUI;
 
+import com.Flire2.ChatInputListener;
 import com.Flire2.GUICommon;
-import com.Flire2.PlayerDataManagerPerm;
-import com.Flire2.PlayerDataManagerTemp;
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,15 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-public class DisplayGUI implements Listener {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-    private static final String GUI_TITLE_PREFIX = "Player Display - ";
+public class SendActionBarGUI implements Listener {
+
+    private static final String GUI_TITLE_PREFIX = "Config Action Bar - ";
+
+    private static final Map<UUID, String> actionBarText = new HashMap<>();
 
     public static void open(Player viewer, Player target) {
         String title = GUI_TITLE_PREFIX + target.getName();
@@ -28,8 +34,10 @@ public class DisplayGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Send Title"));
-        gui.setItem(11, GUICommon.createItem(Material.OAK_SIGN, "Send Action Bar"));
+        String currentText = actionBarText.getOrDefault(target.getUniqueId(), ChatColor.GRAY + "None");
+        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, ChatColor.YELLOW + "Set Action Bar Text", ChatColor.GRAY + "Current: " + currentText));
+
+        gui.setItem(16, GUICommon.createItem(Material.GREEN_CONCRETE, "Send Action Bar"));
 
         viewer.openInventory(gui);
     }
@@ -79,13 +87,25 @@ public class DisplayGUI implements Listener {
         }
 
         if (slot == 10) {
-            SendTitleGUI.open(clicker, target);
-            clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+            clicker.closeInventory();
+            clicker.sendMessage(ChatColor.YELLOW + "Please type the new action bar text in chat.");
+
+            ChatInputListener.inputMap.put(clicker.getUniqueId(), input -> {
+                actionBarText.put(target.getUniqueId(), input);
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+                clicker.sendMessage(ChatColor.GREEN + "Action bar text set to " + input);
+                open(clicker, target);
+            });
         }
 
-        if (slot == 11) {
-            SendActionBarGUI.open(clicker, target);
-            clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+        if (slot == 16) {
+            String message = actionBarText.getOrDefault(target.getUniqueId(), "");
+            if (!message.isEmpty()) {
+                target.sendActionBar(Component.text(message));
+                clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+            } else {
+                clicker.sendMessage(ChatColor.RED + "No action bar text set for this player.");
+            }
         }
     }
 }

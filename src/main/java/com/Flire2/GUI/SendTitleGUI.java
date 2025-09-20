@@ -36,8 +36,11 @@ public class SendTitleGUI implements Listener {
         // Close
         gui.setItem(8, GUICommon.createItem(Material.BARRIER, ChatColor.RED + "Close"));
 
-        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, "Text"));
-        gui.setItem(11, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Subtitle"));
+        String currentTitle = pTitle.getOrDefault(target.getUniqueId(), "None");
+        String currentSubtitle = sTitle.getOrDefault(target.getUniqueId(), "None");
+
+        gui.setItem(10, GUICommon.createItem(Material.OAK_SIGN, "Text", ChatColor.GRAY + "Current Text: " + currentTitle));
+        gui.setItem(11, GUICommon.createItem(Material.OAK_HANGING_SIGN, "Subtitle", ChatColor.GRAY + "Current Text: " + currentSubtitle));
 
         gui.setItem(16, GUICommon.createItem(Material.GREEN_CONCRETE, "Send Title"));
 
@@ -129,7 +132,6 @@ public class SendTitleGUI implements Listener {
             String titleText = pTitle.get(target.getUniqueId());
             String subtitleText = sTitle.get(target.getUniqueId());
 
-            // make it display the curent one with a message when you send the title and make it so you can clear a title in the icons for setting it and shit
             target.sendTitle(titleText, subtitleText, 20, 70, 20);
             clicker.playSound(clicker.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         }
