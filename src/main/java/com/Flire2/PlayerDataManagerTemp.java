@@ -14,8 +14,7 @@ public class PlayerDataManagerTemp {
 
     public PlayerDataManagerTemp(JavaPlugin plugin) {
         File pluginFolder = plugin.getDataFolder();
-        File playerManagerFolder = new File(pluginFolder, "PlayerManager");
-        playersFolder = new File(playerManagerFolder, "players");
+        playersFolder = new File(pluginFolder, "players");
 
         if (!playersFolder.exists()) {
             boolean created = playersFolder.mkdirs();

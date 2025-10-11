@@ -1,5 +1,5 @@
 name: PlayerManager
-version: '0.5.2'
+version: '0.6.0'
 main: com.Flire2.PlayerManager
 api-version: '1.21'
 load: STARTUP

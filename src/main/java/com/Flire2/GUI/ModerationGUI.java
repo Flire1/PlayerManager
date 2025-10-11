@@ -30,7 +30,7 @@ public class ModerationGUI implements Listener {
         gui.setItem(10, GUICommon.createItem(Material.ORANGE_CONCRETE, "Kick", "", ChatColor.GRAY + "> Click to open!"));
         gui.setItem(11, GUICommon.createItem(Material.RED_CONCRETE, "Ban", "", ChatColor.GRAY + "> Click to open!"));
         gui.setItem(12, GUICommon.createItem(Material.BLACK_CONCRETE, "Ban IP", "", ChatColor.GRAY + "> Click to open!"));
-        gui.setItem(13, GUICommon.createItem(Material.YELLOW_CONCRETE, "Warn", "", ChatColor.GRAY + "> Will be added in 0.6.0!"));
+        gui.setItem(13, GUICommon.createItem(Material.YELLOW_CONCRETE, "Warn", "", ChatColor.GRAY + "> Click to open!", ChatColor.GRAY + "> Right Click to view all warnings!", "", ChatColor.GOLD + "> This is an experimental feature. Expect some bugs!"));
 
         viewer.openInventory(gui);
     }
@@ -103,6 +103,21 @@ public class ModerationGUI implements Listener {
                 clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
             } else {
                 clicker.sendMessage(ChatColor.RED + "Target player not found.");
-            }        }
+            }
+        }
+
+        if (slot == 13) {
+            if (target == null) {
+                clicker.sendMessage(ChatColor.RED + "Target player not found.");
+                return;
+            }
+
+            if (click == ClickType.RIGHT) {
+                CurrentWarnGUI.open(clicker, target);
+            } else {
+                WarnGUI.open(clicker, target);
+            }
+            clicker.playSound(clicker.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1.5f);
+        }
     }
 }

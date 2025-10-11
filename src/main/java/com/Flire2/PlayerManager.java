@@ -46,6 +46,8 @@ public final class PlayerManager extends JavaPlugin implements Listener{
         getServer().getPluginManager().registerEvents(new DisplayGUI(), this);
         getServer().getPluginManager().registerEvents(new SendTitleGUI(), this);
         getServer().getPluginManager().registerEvents(new SendActionBarGUI(), this);
+        getServer().getPluginManager().registerEvents(new WarnGUI(), this);
+        getServer().getPluginManager().registerEvents(new CurrentWarnGUI(), this);
 
         getServer().getPluginManager().registerEvents(this, this);
     }

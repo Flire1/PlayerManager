@@ -16,9 +16,8 @@ public class PlayerDataManagerPerm {
     private static File playersFolder;
 
     public PlayerDataManagerPerm(JavaPlugin plugin) {
-        File pluginFolder = plugin.getDataFolder();
-        File playerManagerFolder = new File(pluginFolder, "PlayerManager");
-        playersFolder = new File(playerManagerFolder, "players");
+        File pluginFolder = plugin.getDataFolder(); // plugins/PlayerManager
+        playersFolder = new File(pluginFolder, "players"); // plugins/PlayerManager/players
 
         if (!playersFolder.exists()) {
             boolean created = playersFolder.mkdirs();
