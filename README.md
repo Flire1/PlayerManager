@@ -5,9 +5,6 @@
 It’s fully functional, but more features and polish are on the way.
 Expect frequent updates as we work toward the full v1.0.0 release!
 
-## 🚀 Minor Update Out Now! v0.5.1
-**New Display Menu (Title, Subtitle)**
-
 ## 🚀 Major Update Coming Soon! v0.6.0
 **New warning system + Updates to the display menu (actionbars, scorboard, and more!)**<br>
 **Also quality of life changes!**<br>
@@ -49,7 +46,7 @@ Built to be modular, intuitive, and perfect for server moderation teams.
 
 ### 🥾 Kick Menu
 Choose a preset reason or define your own.
-
+    
 ### 🔨 Ban Menu
 Choose a preset reason or define your own. Also choose a custom duration!
 
